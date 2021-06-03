@@ -85,6 +85,10 @@ import { Car, cars as cars_list } from './cars';
     res.status(200).send(cars_list);
   } );
 
+
+
+  
+
   // @TODO Add an endpoint to get a specific car
   // it should require id
   // it should fail gracefully if no matching car is found
@@ -101,7 +105,8 @@ import { Car, cars as cars_list } from './cars';
     }
 
     // try to find the car by id
-    const car = cars.filter((car) => car.id == id);
+    // The type of id inside request.params is string. You must parse it to integer:
+    const car = cars.filter((car) => car.id == parseInt(id));
     
     // respond not found, if we do not have this id
     if(car && car.length === 0) {
@@ -110,6 +115,12 @@ import { Car, cars as cars_list } from './cars';
     // return the car with a success status code
     res.status(200).send(car);
   } );
+
+
+
+
+
+
 
   /// @TODO Add an endpoint to post a new car to our list
   // it should require id, type, model, and cost
