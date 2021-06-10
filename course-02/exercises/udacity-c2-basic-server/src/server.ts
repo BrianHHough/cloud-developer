@@ -105,7 +105,7 @@ import { Car, cars as cars_list } from './cars';
     }
 
     // try to find the car by id
-    // The type of id inside request.params is string. You must parse it to integer:
+    // The type of id inside request.params is string. You must parse it to integer with parseInt:
     const car = cars.filter((car) => car.id == parseInt(id));
     
     // respond not found, if we do not have this id
