@@ -23,6 +23,8 @@ import { V0MODELS } from './controllers/v0/model.index';
     next();
   });
 
+  // Router - simplifies enterance points 
+  // App we'll use is indexRouter when we encounter base enpoint of v0/
   app.use('/api/v0/', IndexRouter)
 
   // Root URI call
