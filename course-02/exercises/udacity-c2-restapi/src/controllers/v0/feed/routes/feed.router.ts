@@ -7,12 +7,15 @@ const router: Router = Router();
 
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {
+    // we want a new feedItem, declare a variable for items locally....use sequelize to find and count all ordering by id descending
     const items = await FeedItem.findAndCountAll({order: [['id', 'DESC']]});
+    // finding and mapping by url
     items.rows.map((item) => {
             if(item.url) {
                 item.url = AWS.getGetSignedUrl(item.url);
             }
     });
+    // send items back to client
     res.send(items);
 });
 
@@ -41,8 +44,10 @@ router.get('/signed-url/:fileName',
 // NOTE the file name is they key name in the s3 bucket.
 // body : {caption: string, fileName: string};
 router.post('/', 
+    // require auth is important!
     requireAuth, 
     async (req: Request, res: Response) => {
+    // doing the same thing for validating our inputs by pulling out of body and doing some quick checks to make sure they are valid
     const caption = req.body.caption;
     const fileName = req.body.url;
 
@@ -56,11 +61,12 @@ router.post('/',
         return res.status(400).send({ message: 'File url is required' });
     }
 
+    // instantiating our new FeedItem
     const item = await new FeedItem({
             caption: caption,
             url: fileName
     });
-
+    //  and using our sequelize interface to save that item
     const saved_item = await item.save();
 
     saved_item.url = AWS.getGetSignedUrl(saved_item.url);

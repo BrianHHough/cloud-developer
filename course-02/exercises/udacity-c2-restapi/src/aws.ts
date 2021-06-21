@@ -3,10 +3,11 @@ import { config } from './config/config';
 
 const c = config.dev;
 
-//Configure AWS
-var credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
+//Configure AWS and get credentials
+var credentials = new AWS.SharedIniFileCredentials({profile: c.aws_profile});
 AWS.config.credentials = credentials;
 
+// instantiate service and specific region and bucket to use
 export const s3 = new AWS.S3({
   signatureVersion: 'v4',
   region: c.aws_region,
@@ -21,16 +22,24 @@ export const s3 = new AWS.S3({
  *    a url as a string
  */
 export function getGetSignedUrl( key: string ): string{
+  const param = { 
+    Bucket: c.aws_media_bucket, 
+    Key: key, 
+    Expires: 60*5 
+  };
+  const url: string = s3.getSignedUrl('getObject', param);
+  return url;
 
-  const signedUrlExpireSeconds = 60 * 5
+  // ORIGINAL UDACITY CODE
+  // const signedUrlExpireSeconds = 60 * 5
 
-    const url = s3.getSignedUrl('getObject', {
-        Bucket: c.aws_media_bucket,
-        Key: key,
-        Expires: signedUrlExpireSeconds
-      });
+  //   const url = s3.getSignedUrl('getObject', {
+  //       Bucket: c.aws_media_bucket,
+  //       Key: key,
+  //       Expires: signedUrlExpireSeconds
+  //     });
 
-    return url;
+  //   return url;
 }
 
 /* getPutSignedUrl generates an aws signed url to put an item
@@ -41,13 +50,22 @@ export function getGetSignedUrl( key: string ): string{
  */
 export function getPutSignedUrl( key: string ){
 
-    const signedUrlExpireSeconds = 60 * 5
+  const param = { 
+    Bucket: c.aws_media_bucket, 
+    Key: key, 
+    Expires: 60*5 
+  };
+  const url: string = s3.getSignedUrl('putObject', param);
+  return url;
 
-    const url = s3.getSignedUrl('putObject', {
-      Bucket: c.aws_media_bucket,
-      Key: key,
-      Expires: signedUrlExpireSeconds
-    });
+    // ORIGINAL UDACITY STARTER CODE
+    // const signedUrlExpireSeconds = 60 * 5
 
-    return url;
+    // const url = s3.getSignedUrl('putObject', {
+    //   Bucket: c.aws_media_bucket,
+    //   Key: key,
+    //   Expires: signedUrlExpireSeconds
+    // });
+
+    // return url;
 }

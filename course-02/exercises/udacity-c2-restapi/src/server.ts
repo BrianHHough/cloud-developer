@@ -1,3 +1,4 @@
+require('dotenv').config();
 import express from 'express';
 import { sequelize } from './sequelize';
 
@@ -7,8 +8,10 @@ import bodyParser from 'body-parser';
 
 import { V0MODELS } from './controllers/v0/model.index';
 
+// This is an asyncronous function, so we write the await tag to wait for this to complete. Sequalize.addModels registers all modules imported from V0MODELS, which we define in the file linked above:
 (async () => {
   await sequelize.addModels(V0MODELS);
+  // allows us to make sure our db is in sync with our expected model in sequelize (make sure they work together) and make sure everything on the level of updates by applying our migrations in the migrations folder
   await sequelize.sync();
 
   const app = express();
