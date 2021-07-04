@@ -1,15 +1,13 @@
-// import dependencies from Express and `const app = express()` below too
-import express, { Router, Request, Response } from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
 (async () => {
 
-  // Init the Express application (for API requests)
-  // Make sure to import { Router, Request, Response } from Express above
+  // Init the Express application
   const app = express();
 
-  // Set the network port - go to 8002
+  // Set the network port
   const port = process.env.PORT || 8082;
   
   // Use the body parser middleware for post requests
@@ -29,25 +27,33 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
-app.get( "/filteredimage/", async ( req: Request, res: Response ) => {
-  let { image_url } = req.query;
-
-  if ( !image_url ) {
-    return res.status(400).send(`Can't find the needed image_url parameter or it doesn't exist!`);
-  }
-  let filteredpath = await filterImageFromURL(image_url);
-  let delFiles: string[] = [filteredpath];
-  return res.status(200).sendFile(filteredpath, () => {deleteLocalFiles(delFiles)});
-
-} );
-
-
   /**************************************************************************** */
 
   //! END @TODO1
   
   // Root Endpoint
   // Displays a simple message to the user
+  app.get("/filteredimage", async (req, res) => {
+    const imageUrl = req.query.image_url;
+
+    // check imageUrl is valid
+    if (!imageUrl) {
+      return res.status(400).send({
+        message: "The image url is required or is missing"
+      });
+    }
+
+    try {
+      console;
+      const filteredImageFromURL = await filterImageFromURL(imageUrl);
+      res.sendFile(filteredImageFromURL, () =>
+        deleteLocalFiles([filteredImageFromURL])
+      );
+    } catch (error) {
+      res.sendStatus(422).send("Unable to process image");
+    }
+  });
+  
   app.get( "/", async ( req, res ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );

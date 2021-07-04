@@ -9,6 +9,11 @@ The project is split into three parts:
 2. [The RestAPI Backend](https://github.com/udacity/cloud-developer/tree/master/course-02/exercises/udacity-c2-restapi), a Node-Express server which can be deployed to a cloud service. [Covered in the course]
 3. [The Image Filtering Microservice](https://github.com/udacity/cloud-developer/tree/master/course-02/project/image-filter-starter-code), the final project for the course. It is a Node-Express application which runs a simple script to process images. [Your assignment]
 
+# Image
+
+Link: https://d2ycltig8jwwee.cloudfront.net/reviews/1188/fullwidth.9ef0470c.jpg
+![https://d2ycltig8jwwee.cloudfront.net/reviews/1188/fullwidth.9ef0470c.jpg]
+
 ## Tasks
 
 ### Setup Node Environment
