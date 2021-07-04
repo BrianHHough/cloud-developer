@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
@@ -31,11 +31,10 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   /**************************************************************************** */
 
-  //! END @TODO1
   
   // Root Endpoint - which will be /filteredimage
   // Displays a simple message to the user: we'll ingest a request and provide back a response
-  app.get("/filteredimage", async (req, res) => {
+  app.get("/filteredimage", async (req: Request, res: Response) => {
     // Declare an image URL
     const imageUrl = req.query.image_url;
 
@@ -59,6 +58,8 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
       res.sendStatus(422).send("Unable to process image");
     }
   });
+
+    // END @TODO1
   
   // present on the home page to signal we're ready to go!
   app.get( "/", async ( req, res ) => {
