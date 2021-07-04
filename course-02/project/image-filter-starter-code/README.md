@@ -14,16 +14,24 @@ The project is split into three parts:
 Link: https://d2ycltig8jwwee.cloudfront.net/reviews/1188/fullwidth.9ef0470c.jpg
 ![InterstellarImage](https://d2ycltig8jwwee.cloudfront.net/reviews/1188/fullwidth.9ef0470c.jpg)
 
-## Tasks
+# Tasks
 
-### Setup Node Environment
+## ✅ Setup Node Environment
 
 You'll need to create a new node server. Open a new terminal within the project directory and run:
 
 1. Initialize a new project: `npm i`
 2. run the development server with `npm run dev`
 
-### Create a new endpoint in the server.ts file
+### Confirmation that the server runs locally via the browser
+
+![](https://github.com/BrianHHough/cloud-developer/blob/6b45a9415f543dc98e5fa972850f977c0e4eda77/course-02/project/image-filter-starter-code/image/Local-Server-Filtered-Image-Web.png)
+
+### Confirmation that the server runs locally via Postman
+
+![](https://github.com/BrianHHough/cloud-developer/blob/6b45a9415f543dc98e5fa972850f977c0e4eda77/course-02/project/image-filter-starter-code/image/Local-Server-Filtered-Image-Postman.png)
+
+## ✅ Create a new endpoint in the server.ts file
 
 The starter code has a task for you to complete an endpoint in `./src/server.ts` which uses query parameter to download an image from a public URL, filter the image, and return the result.
 
@@ -33,7 +41,7 @@ We've included a few helper functions to handle some of these concepts and we're
 import { filterImageFromURL, deleteLocalFiles } from "./util/util";
 ```
 
-### Deploying your system
+### ✅ Deploying your system
 
 Follow the process described in the course to `eb init` a new application and `eb create` a new environment to deploy your image-filter service! Don't forget you can use `eb deploy` to push changes.
 
@@ -89,17 +97,24 @@ npm run build
 ```
 
 **Make sure to edit the `./.elasticbeanstalk/config.yml` file to add the deploy archive script**
+⚠️ This step is SO important because you will get a warning image in the AWS Elastic Beanstalk console because you haven't uploaded any code file to it...and it's wondering what exactly to deploy, so you'll get a Severe Red Health status ⚠️
 
 ```yaml
 deploy:
   artifact: ./www/Archive.zip
 ```
 
-## Deploy to Elastic Beanstalk
+## ✅ Deploy to Elastic Beanstalk
 
 ```bash
 eb deploy
 ```
+
+### AWS Console with a healthy status check
+
+![InterstellarImage](https://github.com/BrianHHough/cloud-developer/blob/6b45a9415f543dc98e5fa972850f977c0e4eda77/course-02/project/image-filter-starter-code/image/EBS-Deployed-AWS-OK.png)
+
+###
 
 ## Stand Out (Optional)
 
