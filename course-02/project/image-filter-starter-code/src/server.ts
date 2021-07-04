@@ -1,13 +1,15 @@
-import express from 'express';
+// import dependencies from Express and `const app = express()` below too
+import express, { Router, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
 (async () => {
 
-  // Init the Express application
+  // Init the Express application (for API requests)
+  // Make sure to import { Router, Request, Response } from Express above
   const app = express();
 
-  // Set the network port
+  // Set the network port - go to 8002
   const port = process.env.PORT || 8082;
   
   // Use the body parser middleware for post requests
@@ -26,6 +28,19 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   //    image_url: URL of a publicly accessible image
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
+
+app.get( "/filteredimage/", async ( req: Request, res: Response ) => {
+  let { image_url } = req.query;
+
+  if ( !image_url ) {
+    return res.status(400).send(`Can't find the needed image_url parameter or it doesn't exist!`);
+  }
+  let filteredpath = await filterImageFromURL(image_url);
+  let delFiles: string[] = [filteredpath];
+  return res.status(200).sendFile(filteredpath, () => {deleteLocalFiles(delFiles)});
+
+} );
+
 
   /**************************************************************************** */
 
