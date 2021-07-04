@@ -113,6 +113,8 @@ eb deploy
 
 ### AWS Console with a healthy status check
 
+- Link to endpoint URL for a running elastic beanstalk deployment (EB_URL): http://image-filter-starter-code-dev22222.us-east-1.elasticbeanstalk.com/
+
 ![InterstellarImage](https://github.com/BrianHHough/cloud-developer/blob/6b45a9415f543dc98e5fa972850f977c0e4eda77/course-02/project/image-filter-starter-code/image/EBS-Deployed-AWS-OK.png)
 
 ### Image Filter Works from the Elastic Beanstalk Instance
