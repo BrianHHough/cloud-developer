@@ -97,6 +97,7 @@ npm run build
 ```
 
 **Make sure to edit the `./.elasticbeanstalk/config.yml` file to add the deploy archive script**
+
 ⚠️ This step is SO important because you will get a warning image in the AWS Elastic Beanstalk console because you haven't uploaded any code file to it...and it's wondering what exactly to deploy, so you'll get a Severe Red Health status ⚠️
 
 ```yaml
@@ -114,7 +115,14 @@ eb deploy
 
 ![InterstellarImage](https://github.com/BrianHHough/cloud-developer/blob/6b45a9415f543dc98e5fa972850f977c0e4eda77/course-02/project/image-filter-starter-code/image/EBS-Deployed-AWS-OK.png)
 
-###
+### Image Filter Works from the Elastic Beanstalk Instance
+
+![](https://github.com/BrianHHough/cloud-developer/blob/f-auth/course-02/project/image-filter-starter-code/image/EBS-Filtered-Image-Web.png)
+
+### Image Filter Works from the Elastic Beanstalk Instance
+
+This is what the site looks like without putting a link in the URL
+![](https://github.com/BrianHHough/cloud-developer/blob/f-auth/course-02/project/image-filter-starter-code/image/EBS-Filtered-Image-Web-PreLink.png)
 
 ## Stand Out (Optional)
 
