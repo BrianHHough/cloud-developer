@@ -12,7 +12,7 @@ The project is split into three parts:
 # Image
 
 Link: https://d2ycltig8jwwee.cloudfront.net/reviews/1188/fullwidth.9ef0470c.jpg
-![https://d2ycltig8jwwee.cloudfront.net/reviews/1188/fullwidth.9ef0470c.jpg]
+![InterstellarImage](https://d2ycltig8jwwee.cloudfront.net/reviews/1188/fullwidth.9ef0470c.jpg)
 
 ## Tasks
 
@@ -81,7 +81,21 @@ Would you like to enable Spot Fleet requests for this environment?: `n`
 
 ```
 
-#### Deploy Elastic Beanstalk instance
+#### Build & Elastic Beanstalk instance
+
+```bash
+## Build the zip file
+npm run build
+```
+
+**Make sure to edit the `./.elasticbeanstalk/config.yml` file to add the deploy archive script**
+
+```yaml
+deploy:
+  artifact: ./www/Archive.zip
+```
+
+## Deploy to Elastic Beanstalk
 
 ```bash
 eb deploy
